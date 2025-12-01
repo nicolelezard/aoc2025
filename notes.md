@@ -1,3 +1,5 @@
+Do not optimize prematurely. Keep it simple and stupid.
+
 Let your objects be immutable. Make copies of things.
 
 
