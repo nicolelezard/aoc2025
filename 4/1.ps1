@@ -3,7 +3,7 @@ param (
 )
 
 $ErrorActionPreference = 'Stop'
-. $PSScriptRoot\..\utils\Show-Grid.ps1
+. $PSScriptRoot\..\utils\grids.ps1
 
 # $rawInput = Get-Content $PSScriptRoot\example.txt
 $rawInput = Get-Content $PSScriptRoot\input.txt

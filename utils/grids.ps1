@@ -86,3 +86,56 @@ function Show-Grid {
         $row -join ' '
     }
 }
+
+function Get-NeighborCount {
+    [CmdletBinding()]
+    param (
+        [Parameter(Mandatory, ValueFromPipeline)]
+        [hashtable[,]]$grid,
+        [Parameter(Mandatory)]
+        [int]$y,
+        [Parameter(Mandatory)]
+        [int]$x,
+        [Parameter(Mandatory)]
+        [pspropertyexpression]$filter,
+        # stop counting neighbors once the count reaches this value
+        [Parameter()]
+        [int]$stopAt
+    )
+
+    # previous and next line, inside grid bounds
+    $count = 0
+    :y for ($dY = -1; $dY -le 1; $dY++) {
+        if(-not($y + $dY -ge $grid.GetLowerBound(0) -and $y + $dY -le $grid.GetUpperBound(0))){
+            Write-Debug "y: $($y + $dY) out of bounds"
+            0
+            continue y
+        }
+        
+        # previous and next column, inside grid bounds
+        :x for ($dX = -1; $dX -le 1; $dX++) {
+            if(-not ($x + $dX -ge $grid.GetLowerBound(1) -and $x + $dX -le $grid.GetUpperBound(1))){
+                Write-Debug "x: $($x + $dX) out of bounds"
+                0
+                continue x
+            }
+            
+            # don't count the item itself
+            if (0 -eq $dX -and 0 -eq $dY) {
+                Write-Debug "y: $($y + $dY), x: $($x + $dX) skipped"
+                0
+                continue x
+            }
+            
+            Write-Debug "y: $($y + $dY), x: $($x + $dX)"
+
+            $res = $filter.GetValues($grid[($y + $dY),($x + $dX)])[0].Result
+            $res
+            $count += $res
+
+            if ($stopAt -eq $count){
+                break y
+            }
+        }
+    }
+}
