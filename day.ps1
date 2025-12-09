@@ -5,4 +5,4 @@ param (
     $day
 )
 
-Copy-Item -Recurse template $day
+Copy-Item -Recurse $PSScriptRoot\template $PSScriptRoot\$day
