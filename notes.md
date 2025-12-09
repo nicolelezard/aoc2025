@@ -1,5 +1,7 @@
 Do not optimize prematurely. Keep it simple and stupid.
 
+Decouple parts of the problem, like parsing logic and problem logic.
+
 Let your objects be immutable. Make copies of things.
 
 
