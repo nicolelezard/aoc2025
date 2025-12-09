@@ -13,7 +13,7 @@ class Node {
 
     [Node] AddChild() {
         $node = [Node]::new($this)
-        $this.Children.Add($node)
+        [void]$this.Children.Add($node)
         return $node
     }
     
