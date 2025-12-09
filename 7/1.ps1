@@ -3,7 +3,7 @@ param (
 )
 
 $ErrorActionPreference = 'Break'
-. $PSScriptRoot\..\utils\*.ps1
+. $PSScriptRoot\..\utils\grid.ps1
 
 # $rawInput = Get-Content $PSScriptRoot\example.txt
 $rawInput = Get-Content $PSScriptRoot\input.txt
